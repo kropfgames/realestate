@@ -16,25 +16,23 @@ var circle = L.circle([49.2835, -123.1153], {
 //DRAWS FIRST POPUP AT YOUR LOCATION
 
 var stars;
-stars = " <br>☆☆☆☆☆";
+stars = "☆☆☆☆☆";
 
 var noOneHasRatedClickToRateText;
-noOneHasRatedClickToRateText = " 😢<br>Click here to rate." + stars;
+noOneHasRatedClickToRateText = " 😢<br>Click here to rate. <br>" + stars;
 
 //ADDS A 'RATE' BUTTON
 //makes a button that enables user to rate
-var rateYourLocationButton;
-rateYourLocationButton = document.createElement("button");
-rateYourLocationButton.innerHTML = "No one has rated your building!" + noOneHasRatedClickToRateText;
-
 var rateThisBuildingButton;
 rateThisBuildingButton = document.createElement("button");
 rateThisBuildingButton.innerHTML = "No one has rated this building!" + noOneHasRatedClickToRateText;
 
+//might have to make a function to update the variable value of noOneHasRatedClickToRateText
+
 //makes a popup upon loading the page
 var popupAtYourLocation = L.popup()
     .setLatLng([49.2835, -123.1153])
-    .setContent(rateYourLocationButton)
+    .setContent(rateThisBuildingButton)
     .openOn(neighbourhoodMap);
 
 //DRAWS POPUP AT CLICKED LOCATION
@@ -53,10 +51,26 @@ neighbourhoodMap.on('click', onMapClick);
 
 function onStarClickLoggedOut()
 {
-  //make a popup that says: "Sign up with email";
+  //append text saying "Sign up with email";
+  alert("Hello! I am an alert box!!");
+  //popupAtYourLocation.update();
 }
 
-stars.on('click', onStarClickLoggedOut());
+var signUpWithEmail;
+//should be a text field with a placeholder
+signUpWithEmail = " <br>Enter your email.";
+
+//listens for a click on a popup to enable signing up
+//the alert works but the popup doesn't update
+rateThisBuildingButton.addEventListener ("click", function() {
+  //alert("did something");
+  noOneHasRatedClickToRateText = " 😢<br>Click here to rate. <br>" + stars + signUpWithEmail;
+  rateThisBuildingButton.innerHTML = "No one has rated this building!" + noOneHasRatedClickToRateText;
+  popupAtYourLocation.setContent(rateThisBuildingButton);
+  popupAtYourLocation.update();
+  popupAtASpot.update().setContent(rateThisBuildingButton);
+});
+
 
 //⭐
 
