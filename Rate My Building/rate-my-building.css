@@ -43,3 +43,50 @@ button
   background-color: white;
   line-height: 150%;
 }
+
+/*the form for signing up*/
+#signUpForm
+{
+    background-color: white;
+    font-size: 100%;
+    align-items: center;
+    justify-content: center;
+}
+
+#signUpInputField
+{
+  font-size: 91%;
+  padding: 2.5%;
+  margin: 5%;
+  width: 8em;
+  border-color: darkslategray;
+  border-width: thin;
+  
+}
+
+#submitButtonText
+{
+  font-size: 100%;
+  border-style: ridge;
+  border-radius: 100px;
+  color: white;
+  background-color: #f03;
+  opacity: 0.85;
+  border-color: #f03;
+  padding: 5%;
+}
+
+#submitButtonText:hover
+{
+  outline: none;
+  background-color: white;
+  color: #f03;
+}
+
+#submitButtonText:active
+{
+  color: white;
+  background-color: #ff3b62;
+  border-color: #ff3b62;
+
+}
