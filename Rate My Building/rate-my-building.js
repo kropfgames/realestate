@@ -53,46 +53,49 @@ function onStarClickLoggedOut()
 
 //makes an sign up input field with a label
 //an input field that allows the user to sign up with a credential
+//will use ajax to send the data and prevent page refresh
 var signUpInputForm;
-signUpInputForm = '<form id="signUpForm" action= "" method="post" name="signUpForm><label for="signUpInputField" id="signUpLabel">Sign up with your phone number</label><br><input id="signUpInputField" type="tel" placeholder="604 456 7890" name="phoneNumber"><br><input id="submitButtonText" type="submit" value="Send me a code"></form>';
+signUpInputForm = '<form id="signUpForm"><label for="signUpInputField" id="signUpLabel">Sign up with your phone number</label><br><input id="signUpInputField" type="tel" placeholder="6041234567" name="phoneNumber" required="required" pattern="[0-9]{10}"><br><button id="submitButtonText" type="submit">Send me a code</button></form>';
 
 // makes a one-time event listener
 function onetimeEventListener(node, type, callback) {
 
 	// create event
-	node.addEventListener(type, function(e) {
+	node.addEventListener(type, function(event) {
 		// remove event
-		e.target.removeEventListener(e.type, arguments.callee);
+		event.target.removeEventListener(event.type, arguments.callee);
 		// call handler
 		return callback();
 	});
 
 }
 
-// calls onetimeEventListener() to call showInputForm() one time when rateThisBuildingButton is clicked
+// calls onetimeEventListener() to show input form one time when rateThisBuildingButton is clicked
 // after the first click, the listener is removed
 onetimeEventListener(rateThisBuildingButton, "click", showInputForm);
 
-//changes the popup from: its label, to: stars and sign up input field
-function showInputForm(e)
+//updates the current content in each popup to the updated content
+function showInputForm()
 {
   noOneHasRatedClickToRateText = stars + "<br>" + signUpInputForm;
   rateThisBuildingButton.innerHTML = noOneHasRatedClickToRateText;
-  popupAtYourLocation.setContent(rateThisBuildingButton);
-  popupAtYourLocation.update();
+  //updates every popup
+  popupAtYourLocation.update().setContent(rateThisBuildingButton);
   popupAtASpot.update().setContent(rateThisBuildingButton);
 }
- 
-//
-//function that is called on submit of the sign up FORM
-document.getElementById('signUpForm').addEventListener('submit', function(evt){
 
-  evt.preventDefault();
-  alert("did something");
-  signUpInputForm = '<form id="signUpForm" action="" method="post"><label for="signUpInputField" id="signUpLabel">Enter the code we texted you</label><br><input id="signUpInputField" type="tel" placeholder="1 604 456 7890"><br><input id="submitButtonText" type="submit" value="Submit Code to Sign Up"></form>';
+//listens for the submit of a phone number input to change form
+rateThisBuildingButton.addEventListener("submit", showVerificationForm);
 
-})
-
+//prevents default but doesn't change form - must update form
+function showVerificationForm(event)
+{
+    event.preventDefault();
+    signUpInputForm = '<form id="sendVerificationCode"><label for="signUpInputField" id="signUpLabel">Enter the code we texted you</label><br><input id="signUpInputField" type="numbers" placeholder="123 456" size="6" required="required"><br><button id="submitButtonText" type="submit">Submit Code to Sign Up</button></form>';
+    
+    //updates the current content in each popup to the updated content
+    showInputForm();
+}
 
 /*
 what need to be done next:
