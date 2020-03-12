@@ -26,8 +26,6 @@ noOneHasRatedClickToRateText = " 😢<br>Click here to rate. <br>" + stars;
 
 rateThisBuildingButton.innerHTML = "No one has rated this building!" + noOneHasRatedClickToRateText;
 
-//might have to make a function to update the variable value of noOneHasRatedClickToRateText
-
 //makes a popup upon loading the page
 var popupAtYourLocation = L.popup()
 .setLatLng([49.2835, -123.1153])
@@ -54,10 +52,9 @@ function onStarClickLoggedOut()
 }
 
 //makes an sign up input field with a label
-//must add an on submit post="/form.php"
 //an input field that allows the user to sign up with a credential
 var signUpInputForm;
-signUpInputForm = '<form id="signUpForm" action="/userSignUp.php" method="post" name="signUpForm><label for="signUpInputField" id="signUpLabel">Sign up with your phone number</label><br><input id="signUpInputField" type="tel" placeholder="604 456 7890" name="phoneNumber"><br><input id="submitButtonText" type="submit" value="Send me a code"></form>';
+signUpInputForm = '<form id="signUpForm" action= "" method="post" name="signUpForm><label for="signUpInputField" id="signUpLabel">Sign up with your phone number</label><br><input id="signUpInputField" type="tel" placeholder="604 456 7890" name="phoneNumber"><br><input id="submitButtonText" type="submit" value="Send me a code"></form>';
 
 // makes a one-time event listener
 function onetimeEventListener(node, type, callback) {
@@ -86,16 +83,15 @@ function showInputForm(e)
   popupAtASpot.update().setContent(rateThisBuildingButton);
 }
  
-//not working - must enable input into the input field 
+//
 //function that is called on submit of the sign up FORM
 document.getElementById('signUpForm').addEventListener('submit', function(evt){
 
   evt.preventDefault();
   alert("did something");
-  signUpInputForm = '<form id="signUpForm" action="/userSignUp.php" method="post"><label for="signUpInputField" id="signUpLabel">Enter the code we texted you</label><br><input id="signUpInputField" type="tel" placeholder="1 604 456 7890"><br><input id="submitButtonText" type="submit" value="Submit Code to Sign Up"></form>';
+  signUpInputForm = '<form id="signUpForm" action="" method="post"><label for="signUpInputField" id="signUpLabel">Enter the code we texted you</label><br><input id="signUpInputField" type="tel" placeholder="1 604 456 7890"><br><input id="submitButtonText" type="submit" value="Submit Code to Sign Up"></form>';
 
 })
-
 
 
 /*
